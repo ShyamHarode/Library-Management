@@ -121,7 +121,7 @@ function newUser() {
                 className="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
                 onClick={(e) => handleAdd(e)}
               >
-                Create Account
+                Create New User
               </button>
             </div>
           </div>
