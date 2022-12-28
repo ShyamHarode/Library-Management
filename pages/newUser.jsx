@@ -3,6 +3,8 @@ import Router from "next/router";
 import { useDispatch } from "react-redux";
 import { addUser } from "../slices/userListSlice";
 import { updateInfo } from "../slices/userSlice";
+import Navbar from "../components/Layouts/Navbar";
+import Footer from "../components/Layouts/Footer";
 
 const initialState = {
   username: "",
@@ -41,7 +43,7 @@ function newUser() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen pt-20 bg-gray-100">
       <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
         <h3 className="text-2xl font-bold text-center">User Registration</h3>
         <form action="">
@@ -132,3 +134,13 @@ function newUser() {
 }
 
 export default newUser;
+
+newUser.getLayout = function PageLayout(page) {
+  return (
+    <>
+      <Navbar />
+      {page}
+      <Footer />
+    </>
+  );
+};

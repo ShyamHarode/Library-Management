@@ -53,7 +53,7 @@ function user() {
   };
 
   return (
-    <div className="w-full flex items-center justify-around flex-wrap min-h-screen bg-gray-100 gap-5">
+    <div className="w-full flex items-center justify-around flex-wrap min-h-screen pt-20 sm:pl-72 bg-gray-100 gap-5">
       <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
         <h3 className="text-2xl font-bold text-center">User </h3>
         <div className="p-2">Name: {currentUser.name}</div>

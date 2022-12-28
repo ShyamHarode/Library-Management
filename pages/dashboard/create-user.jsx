@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Router from "next/router";
 import { useDispatch } from "react-redux";
-import { addUser } from "../slices/userListSlice";
-import { updateInfo } from "../slices/userSlice";
+import { addUser } from "../../slices/userListSlice";
+import { updateInfo } from "../../slices/userSlice";
 
 const initialState = {
   username: "",
@@ -36,12 +36,14 @@ function newUser() {
     }
     dispatch(updateInfo(user));
     dispatch(addUser(user));
+
     setUser(initialState);
+    console.log("user");
     Router.push("/login");
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen pt-20 sm:pl-72 bg-gray-100">
       <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
         <h3 className="text-2xl font-bold text-center">User Registration</h3>
         <form action="">
