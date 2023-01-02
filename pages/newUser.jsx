@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import Router from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../slices/userListSlice";
 import { updateInfo } from "../slices/userSlice";
 import Navbar from "../components/Layouts/Navbar";
 import Footer from "../components/Layouts/Footer";
 
 const initialState = {
-  username: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
+  id: "",
+  userInfo: {
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    type: "",
+  },
+  status: "",
+  books: [],
+  payment: 0,
 };
 function newUser() {
   const [user, setUser] = useState(initialState);
@@ -21,23 +28,28 @@ function newUser() {
     let key = e.target.name;
     let val = e.target.value;
 
-    setUser({ ...user, [key]: val });
+    setUser({
+      ...user,
+      userInfo: { ...user.userInfo, [key]: val },
+      id: Date.now(),
+    });
   };
 
   const handleAdd = (e) => {
     e.preventDefault();
     if (
-      user.username == "" ||
-      user.firstName == "" ||
-      user.lastName == "" ||
-      user.email == "" ||
-      user.password == ""
+      user.userInfo.username == "" ||
+      user.userInfo.firstName == "" ||
+      user.userInfo.lastName == "" ||
+      user.userInfo.email == "" ||
+      user.userInfo.password == ""
     ) {
       alert("Please fill all the fields");
       return;
     }
     dispatch(updateInfo(user));
     dispatch(addUser(user));
+
     setUser(initialState);
     Router.push("/login");
   };
@@ -116,6 +128,30 @@ function newUser() {
                 value={user.password}
                 onChange={(e) => handleChange(e)}
               />
+            </div>
+
+            <div className="mt-4">
+              <div className="block">User type</div>
+              <label className="pointer mx-2 ">
+                <input
+                  type="radio"
+                  className="m-1"
+                  name="type"
+                  value="ADMIN"
+                  onChange={(e) => handleChange(e)}
+                />
+                Admin
+              </label>
+              <label className="pointer mx-2">
+                <input
+                  className="m-1"
+                  type="radio"
+                  name="type"
+                  value="USER"
+                  onChange={(e) => handleChange(e)}
+                />
+                User
+              </label>
             </div>
             <div className="flex">
               <button

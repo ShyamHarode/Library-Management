@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addBook } from "../../slices/bookSlice";
 
 const initialState = {
+  id: "",
   name: "",
   isbn: "",
   qty: "",
@@ -11,33 +12,27 @@ const initialState = {
 };
 
 function newBook() {
-  // const [name, setName] = useState("");
-  // const [isbn, setIsbn] = useState("");
-  // const [qty, setQty] = useState("");
-  // const [date, setDate] = useState("");
-  // const [img, setImg] = useState("");
   const [book, setBook] = useState(initialState);
+  const bookList = useSelector((state) => state.books);
+
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     let key = e.target.name;
     let val = e.target.value;
     setBook({ ...book, [key]: val });
-    console.log(e);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addBook(book));
-
-    console.log("submit");
+    setBook(initialState);
   };
 
   return (
     <div className="flex items-center justify-center gap-4 p-12 pt-24 sm:pl-72 bg-gray-200">
       <div className="mx-auto w-full max-w-[550px] bg-white rounded-lg shadow-md p-4">
         <form>
-          {console.log(book)}
           <div className="-mx-3 flex flex-wrap">
             <div className="w-full px-3 sm:w-1/2">
               <div className="mb-5">
@@ -139,13 +134,29 @@ function newBook() {
               type="submit"
               onClick={(e) => handleSubmit(e)}
             >
-              Submit
+              Add new Book
             </button>
           </div>
         </form>
       </div>
-      <div className="mx-auto w-full max-w-[550px] max-h-[550px]  bg-white rounded-lg shadow-md p-4 ">
-        Available books
+      <div className="mx-6 w-full max-w-[550px] max-h-[550px] bg-white text-center rounded-lg shadow-md p-4 ">
+        <strong>Available books</strong>
+        <div className="px-6 py-2 flex justify-between">
+          <strong>Book</strong>
+          <strong>Quantity</strong>
+        </div>
+        <ul className="p-3 overflow-y-auto">
+          {bookList.map((b, idx) => {
+            return (
+              <li
+                key={idx}
+                className="px-4 py-2 flex justify-between hover:bg-gray-200"
+              >
+                <span>{b.name} </span> <span>{b.qty}</span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

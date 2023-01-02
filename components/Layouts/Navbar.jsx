@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 
 import Link from "next/link";
+import Cart from "../Cart";
 
 function Navbar() {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.loggedUser);
 
   return (
     <header className="w-screen fixed flex items-center h-20 px-6 sm:px-10 bg-white">
@@ -58,7 +59,8 @@ function Navbar() {
       <div className="flex flex-shrink-0 items-center ml-auto">
         <button className="inline-flex items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
           <div className="hidden md:flex md:flex-col md:items-end md:leading-tight">
-            <span className="font-semibold">{user.userInfo.firstName}</span>
+            {/* <span className="font-semibold">{user.userInfo.firstName}</span> */}
+            {console.log("navv...", user)}
             <span className="text-sm text-gray-600">Lecturer</span>
           </div>
           <Link href="/dashboard/user">
@@ -82,7 +84,10 @@ function Navbar() {
           </svg> */}
           </Link>
         </button>
-        <div className="border-l pl-3 ml-3 space-x-1">
+        <div className="border-l pl-3 ml-3 space-x-1 flex items-center">
+          <span className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
+            <Cart />
+          </span>
           <button className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
             <span className="sr-only">Notifications</span>
             <span className="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full"></span>

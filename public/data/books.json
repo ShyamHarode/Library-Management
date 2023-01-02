@@ -1,37 +1,59 @@
 [{
-        "title": "Ramayan",
-        "isbn": "1222456789",
-        "price": "500",
-        "quantity": 5,
-        "image": "Ramayan.jpg"
-    },
-    {
-        "title": "Gita",
-        "isbn": "1321476889",
-
-        "price": "400",
-        "quantity": 5,
-        "image": "Ramayan.jpg"
+        "id": "1",
+        "name": "Ramayan",
+        "isbn": "87951",
+        "qty": "15",
+        "date": "05122022",
+        "img": "ramayan.jpg"
     }, {
-        "title": "ved",
-        "isbn": "1321439989",
-
-        "price": "1000",
-        "quantity": 5,
-        "image": "Ramayan.jpg"
+        "id": "2",
+        "name": "Gita",
+        "isbn": "8797651",
+        "qty": "125",
+        "date": "05122022",
+        "img": "ramayan.jpg"
     }, {
-        "title": "Ramayan",
-        "isbn": "1325556789",
-
-        "price": "500",
-        "quantity": 5,
-        "image": "Ramayan.jpg"
+        "id": "",
+        "name": "aaa",
+        "isbn": "879651",
+        "qty": "125",
+        "date": "05122022",
+        "img": "ramayan.jpg"
     }, {
-        "title": "rrr",
-        "isbn": "11111456489",
-
-        "price": "500",
-        "quantity": 5,
-        "image": "Ramayan.jpg"
+        "id": "",
+        "name": "qqq",
+        "isbn": "87349651",
+        "qty": "155",
+        "date": "05122022",
+        "img": "ramayan.jpg"
+    }, {
+        "id": "",
+        "name": "rrr",
+        "isbn": "879q651",
+        "qty": "15",
+        "date": "05122022",
+        "img": "ramayan.jpg"
+    }, {
+        "id": "",
+        "name": "mmm",
+        "isbn": "8749651",
+        "qty": "15",
+        "date": "05122022",
+        "img": "ramayan.jpg"
+    }, {
+        "id": "",
+        "name": "ttt",
+        "isbn": "873429651",
+        "qty": "15",
+        "date": "05122022",
+        "img": "ramayan.jpg"
+    }, {
+        "id": "",
+        "name": "Gipppta",
+        "isbn": "87969851",
+        "qty": "1885",
+        "date": "05122022",
+        "img": "ramayan.jpg"
     }
+
 ]

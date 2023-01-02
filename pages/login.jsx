@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentUser } from "../slices/userSlice";
+import { setLoggedUser } from "../slices/loggedUserSlice";
 import Router from "next/router";
 
 function login() {
-  const [currUser, setCurrUser] = useState();
+  const [currUser, setCurrUser] = useState({
+    email: "",
+    password: "",
+    type: "",
+  });
   const userList = useSelector((state) => state.userList);
   const dispatch = useDispatch();
 
@@ -12,8 +16,12 @@ function login() {
     e.preventDefault();
 
     let flag = userList.some((user) => {
-      if (user.email == currUser.email && user.password == currUser.password) {
-        dispatch(setCurrentUser(user));
+      if (
+        user.userInfo.email == currUser.email &&
+        user.userInfo.password == currUser.password &&
+        user.userInfo.type == currUser.type
+      ) {
+        dispatch(setLoggedUser(user));
         return true;
       } else return false;
     });
@@ -29,12 +37,47 @@ function login() {
       className="flex items-center h-screen justify-center bg-cover"
       style={{ backgroundImage: "url(images/library-bg.jpg" }}
     >
+      {console.log("ulist...", userList)}
       <div className="flex flex-col items-center p-3 bg-white rounded-lg">
         <div>
-          <h3 className="text-4xl font-bold ">Login</h3>
+          <h3 className="text-4xl text-center font-bold ">Login</h3>
+          <div className="mt-3">
+            <label
+              className="pointer mx-2 "
+              style={
+                currUser.type === "ADMIN"
+                  ? { fontWeight: "bold", color: "burlywood" }
+                  : { color: "black" }
+              }
+            >
+              <input
+                type="radio"
+                className="m-1"
+                name="type"
+                onChange={() => setCurrUser({ ...currUser, type: "ADMIN" })}
+              />
+              Admin
+            </label>
+            <label
+              className="pointer mx-2"
+              style={
+                currUser.type === "USER"
+                  ? { fontWeight: "bold", color: "burlywood" }
+                  : { color: "black" }
+              }
+            >
+              <input
+                className="m-1"
+                type="radio"
+                name="type"
+                onChange={() => setCurrUser({ ...currUser, type: "USER" })}
+              />
+              User
+            </label>
+          </div>
         </div>
         {/* {error && <div style={{ color: "red" }}>Invalid details</div>} */}
-        <div className=" px-6 py-4 mt-6 overflow-hidden  sm:max-w-lg sm:rounded-lg">
+        <div className=" px-6 py-4 mt-3 overflow-hidden  sm:max-w-lg sm:rounded-lg">
           <form>
             <div className="flex items-center justify-between">
               <label
@@ -74,7 +117,7 @@ function login() {
             <div className="flex justify-center items-center mt-4">
               <button
                 type="submit"
-                className="w-50 px-3 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+                className="w-50 px-3 py-2 tracking-wide text-white bg-blue-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
                 onClick={(e) => userAuth(e)}
               >
                 Login

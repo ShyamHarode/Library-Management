@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import BookList from "../../components/BookList";
 import books from "../../public/data/books.json";
@@ -10,9 +10,28 @@ import Link from "next/link";
 
 function dashboard({ children }) {
   const userList = useSelector((state) => state.userList);
-  const user = useSelector((state) => state.user);
-  const [sidebar, setSidebar] = useState(true);
-  console.log(user);
+  const books = useSelector((state) => state.books);
+
+  const [activeUser, setActiveUser] = useState(0);
+  const [bookStock, setBookStock] = useState(0);
+
+  const handleData = () => {
+    let active = 0;
+    let stock = 0;
+    userList.forEach((user) => {
+      if (user.status == "ACTIVE") {
+        active++;
+      }
+    });
+    books.forEach((book) => {
+      stock += +book.qty;
+    });
+    setActiveUser(active);
+    setBookStock(stock);
+  };
+  useEffect(() => {
+    handleData();
+  }, [userList, books]);
 
   return (
     <div className="pt-20 bg-gray-100 min-h-screen">
@@ -84,7 +103,7 @@ function dashboard({ children }) {
               <span className="block text-2xl font-bold">
                 {userList.length}
               </span>
-              <span className="block text-gray-500">Students</span>
+              <span className="block text-gray-500">Users</span>
             </div>
           </div>
           <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -105,7 +124,7 @@ function dashboard({ children }) {
               </svg>
             </div>
             <div>
-              <span className="block text-2xl font-bold">6</span>
+              <span className="block text-2xl font-bold">{activeUser}</span>
               <span className="block text-gray-500">Active</span>
             </div>
           </div>
@@ -127,7 +146,9 @@ function dashboard({ children }) {
               </svg>
             </div>
             <div>
-              <span className="inline-block text-2xl font-bold">9</span>
+              <span className="inline-block text-2xl font-bold">
+                {books.length}
+              </span>
               <span className="inline-block text-xl text-gray-500 font-semibold">
                 {}
               </span>
@@ -152,64 +173,12 @@ function dashboard({ children }) {
               </svg>
             </div>
             <div>
-              <span className="block text-2xl font-bold">83%</span>
+              <span className="block text-2xl font-bold">{bookStock}</span>
               <span className="block text-gray-500">Stock</span>
             </div>
           </div>
         </section>
         <section className="flex flex-wrap gap-6">
-          <div className="flex items-center p-8 bg-white shadow rounded-lg">
-            <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-yellow-600 bg-yellow-100 rounded-full mr-6">
-              <svg
-                aria-hidden="true"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
-                <path
-                  fill="#fff"
-                  d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                />
-              </svg>
-            </div>
-            <div>
-              <span className="block text-2xl font-bold">25</span>
-              <span className="block text-gray-500">Lections left</span>
-            </div>
-          </div>
-
-          <div className="flex items-center p-8 bg-white shadow rounded-lg">
-            <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-teal-600 bg-teal-100 rounded-full mr-6">
-              <svg
-                aria-hidden="true"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <div>
-              <span className="block text-2xl font-bold">139</span>
-              <span className="block text-gray-500">
-                Hours spent on lections
-              </span>
-            </div>
-          </div>
           <div className="row-span-3 bg-white shadow rounded-lg">
             <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
               <span>Students by average mark</span>
@@ -247,76 +216,24 @@ function dashboard({ children }) {
                   <span className="text-gray-600">Annette Watson</span>
                   <span className="ml-auto font-semibold">9.3</span>
                 </li>
-                <li className="flex items-center">
-                  <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                    <img
-                      src="https://randomuser.me/api/portraits/men/81.jpg"
-                      alt="Calvin Steward profile picture"
-                    />
-                  </div>
-                  <span className="text-gray-600">Calvin Steward</span>
-                  <span className="ml-auto font-semibold">8.9</span>
-                </li>
-                <li className="flex items-center">
-                  <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                    <img
-                      src="https://randomuser.me/api/portraits/men/80.jpg"
-                      alt="Ralph Richards profile picture"
-                    />
-                  </div>
-                  <span className="text-gray-600">Ralph Richards</span>
-                  <span className="ml-auto font-semibold">8.7</span>
-                </li>
-                <li className="flex items-center">
-                  <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                    <img
-                      src="https://randomuser.me/api/portraits/men/79.jpg"
-                      alt="Bernard Murphy profile picture"
-                    />
-                  </div>
-                  <span className="text-gray-600">Bernard Murphy</span>
-                  <span className="ml-auto font-semibold">8.2</span>
-                </li>
-                <li className="flex items-center">
-                  <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                    <img
-                      src="https://randomuser.me/api/portraits/women/78.jpg"
-                      alt="Arlene Robertson profile picture"
-                    />
-                  </div>
-                  <span className="text-gray-600">Arlene Robertson</span>
-                  <span className="ml-auto font-semibold">8.2</span>
-                </li>
-                <li className="flex items-center">
-                  <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                    <img
-                      src="https://randomuser.me/api/portraits/women/77.jpg"
-                      alt="Jane Lane profile picture"
-                    />
-                  </div>
-                  <span className="text-gray-600">Jane Lane</span>
-                  <span className="ml-auto font-semibold">8.1</span>
-                </li>
-                <li className="flex items-center">
-                  <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                    <img
-                      src="https://randomuser.me/api/portraits/men/76.jpg"
-                      alt="Pat Mckinney profile picture"
-                    />
-                  </div>
-                  <span className="text-gray-600">Pat Mckinney</span>
-                  <span className="ml-auto font-semibold">7.9</span>
-                </li>
-                <li className="flex items-center">
-                  <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                    <img
-                      src="https://randomuser.me/api/portraits/men/75.jpg"
-                      alt="Norman Walters profile picture"
-                    />
-                  </div>
-                  <span className="text-gray-600">Norman Walters</span>
-                  <span className="ml-auto font-semibold">7.7</span>
-                </li>
+                {userList.map((u, idx) => {
+                  return (
+                    <li key={idx} className="flex items-center">
+                      <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img
+                          src="https://randomuser.me/api/portraits/men/81.jpg"
+                          alt="Calvin Steward profile picture"
+                        />
+                      </div>
+                      <span className="text-gray-600">
+                        {u.userInfo.firstName} {u.userInfo.lastName}
+                      </span>
+                      <span className="ml-auto font-semibold">
+                        {u.books.length}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
@@ -332,10 +249,11 @@ function dashboard({ children }) {
           </div>
           <div className="w-full flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
             <div className="px-6 py-3 font-semibold">Available Books</div>
-            <BookList books={books} />
+            <BookList books={books} dashboard={true} />
           </div>
         </section>
       </main>
+      {console.log(userList)}
     </div>
   );
 }
