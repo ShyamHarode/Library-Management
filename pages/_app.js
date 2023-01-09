@@ -1,9 +1,12 @@
 import "../styles/globals.css";
 import { Provider } from "react-redux";
-import store from "../app/store";
+import { storeWrapper } from "../app/store";
 import Layout from "../components/Layouts/Layout";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, ...rest }) {
+  const { store, props } = storeWrapper.useWrappedStore(rest);
+  const { pageProps } = props;
+
   if (Component.getLayout) {
     return (
       <Provider store={store}>
