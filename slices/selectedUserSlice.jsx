@@ -5,7 +5,6 @@ const selectedUserSlice = createSlice({
   initialState: {},
   reducers: {
     setSelectedUser(state, action) {
-      console.log("selecteduuu--------", action.payload);
       return action.payload;
     },
   },

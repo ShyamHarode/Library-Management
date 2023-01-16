@@ -20,7 +20,12 @@ function newBook() {
   const handleChange = (e) => {
     let key = e.target.name;
     let val = e.target.value;
-    setBook({ ...book, [key]: val });
+    setBook({ ...book, [key]: val, id: Date.now() });
+  };
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setBook({ ...book, img: URL.createObjectURL(file) });
   };
 
   const handleSubmit = (e) => {
@@ -119,8 +124,8 @@ function newBook() {
                 <input
                   type="file"
                   name="img"
-                  value={book.img}
-                  onChange={(e) => handleChange(e)}
+                  // value={book.img}
+                  onChange={(e) => handleImage(e)}
                   accept="image/*"
                   className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
@@ -145,7 +150,7 @@ function newBook() {
           <strong>Book</strong>
           <strong>Quantity</strong>
         </div>
-        <ul className="p-3 overflow-y-auto">
+        <ul className="p-3 overflow-y-auto max-h-[450px]">
           {bookList.map((b, idx) => {
             return (
               <li

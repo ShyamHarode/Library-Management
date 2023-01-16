@@ -4,13 +4,17 @@ import { deleteUser } from "../../slices/userListSlice";
 import Router from "next/router";
 import { setSelectedUser } from "../../slices/selectedUserSlice";
 
-function users() {
+function members() {
   const dispatch = useDispatch();
   const list = useSelector((state) => state.userList);
 
   const handleIssue = (user) => {
     dispatch(setSelectedUser(user));
-    Router.push("/dashboard/issue-book");
+    Router.push(`/dashboard/${user.userInfo.username}/issue-book`);
+  };
+  const handleProfile = (user) => {
+    dispatch(setSelectedUser(user));
+    Router.push(`/dashboard/${user.userInfo.username}`);
   };
 
   return (
@@ -26,6 +30,12 @@ function users() {
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     No.
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Profile
                   </th>
                   <th
                     scope="col"
@@ -69,19 +79,27 @@ function users() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {idx + 1}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <img
+                          className="w-10 h-10 rounded-full cursor-pointer"
+                          src="/images/No_Image_Available.jpg"
+                          onClick={() => handleProfile(user)}
+                          alt="No image"
+                        />
+                      </td>
+                      <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                         {user.userInfo.firstName}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                         {user.status}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                         {user.books.length}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                         {user.payment}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                         <button
                           className="bg-purple-400 rounded-lg p-2 mx-2 h-10 text-center"
                           onClick={() => handleIssue(user)}
@@ -107,4 +125,4 @@ function users() {
   );
 }
 
-export default users;
+export default members;

@@ -1,24 +1,29 @@
 import "../styles/globals.css";
 import { Provider } from "react-redux";
-import { storeWrapper } from "../app/store";
+import store from "../app/store";
 import Layout from "../components/Layouts/Layout";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
-function MyApp({ Component, ...rest }) {
-  const { store, props } = storeWrapper.useWrappedStore(rest);
-  const { pageProps } = props;
+function MyApp({ Component, pageProps }) {
+  let persistor = persistStore(store);
 
   if (Component.getLayout) {
     return (
       <Provider store={store}>
-        {Component.getLayout(<Component {...pageProps} />)}
+        <PersistGate loading={null} persistor={persistor}>
+          {Component.getLayout(<Component {...pageProps} />)}
+        </PersistGate>
       </Provider>
     );
   }
   return (
     <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <PersistGate loading={null} persistor={persistor}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </PersistGate>
     </Provider>
   );
 }

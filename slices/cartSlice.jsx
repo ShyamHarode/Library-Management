@@ -2,24 +2,33 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: [],
+  initialState: {
+    bookCart: [],
+    payment: 0,
+  },
   reducers: {
     updateCart: (state, action) => {
-      if (state.some((book) => book.name === action.payload.name)) {
-        state.splice(
-          state.findIndex((book) => book.name === action.payload.name),
+      const bookObj = action.payload;
+      if (state.bookCart?.some((book) => book.id === bookObj.id)) {
+        state.bookCart.splice(
+          state.bookCart.findIndex((book) => book.id === bookObj.id),
           1
         );
       } else {
-        state.push(action.payload);
+        state.bookCart.push(bookObj);
       }
-      console.log("cart--------", action.payload);
+    },
+    updateCartPayment: (state, action) => {
+      state.payment = action.payload;
     },
     resetCart: (state, action) => {
-      return [];
+      return {
+        bookCart: [],
+        payment: 0,
+      };
     },
   },
 });
 
-export const { updateCart, resetCart } = cartSlice.actions;
+export const { updateCart, updateCartPayment, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;

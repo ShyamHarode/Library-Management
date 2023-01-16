@@ -1,19 +1,32 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import BookList from "../../components/BookList";
-import books from "../../public/data/books.json";
+import { setSelectedUser } from "../../slices/selectedUserSlice";
 import Link from "next/link";
-// export async function getStaticProps(context) {
-//   const books = await import("../public/data/books.json");
-//   return { props: { books: books.default } };
-// }
+import { useRouter } from "next/router";
+import Chart from "../../components/Chart";
 
-function dashboard({ children }) {
+function dashboard() {
   const userList = useSelector((state) => state.userList);
   const books = useSelector((state) => state.books);
+  const { authState, authUser } = useSelector((state) => state.auth);
 
   const [activeUser, setActiveUser] = useState(0);
   const [bookStock, setBookStock] = useState(0);
+  const [bookList, setBookList] = useState(books);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleProfile = (user) => {
+    dispatch(setSelectedUser(user));
+  };
+
+  const handleSearch = (e) => {
+    let val = e.target.value.toUpperCase();
+    const list = books.filter((book) => book.name.toUpperCase().includes(val));
+    setBookList(list);
+  };
 
   const handleData = () => {
     let active = 0;
@@ -32,6 +45,11 @@ function dashboard({ children }) {
   useEffect(() => {
     handleData();
   }, [userList, books]);
+  useEffect(() => {
+    if (!authState) {
+      router.push("/login");
+    }
+  }, []);
 
   return (
     <div className="pt-20 bg-gray-100 min-h-screen">
@@ -129,34 +147,7 @@ function dashboard({ children }) {
             </div>
           </div>
           <div className="flex items-center p-8 bg-white shadow rounded-lg">
-            <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
-              <svg
-                aria-hidden="true"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
-                />
-              </svg>
-            </div>
-            <div>
-              <span className="inline-block text-2xl font-bold">
-                {books.length}
-              </span>
-              <span className="inline-block text-xl text-gray-500 font-semibold">
-                {}
-              </span>
-              <span className="block text-gray-500">Books</span>
-            </div>
-          </div>
-          <div className="flex items-center p-8 bg-white shadow rounded-lg">
-            <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+            <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-yellow-800 bg-yellow-100 rounded-full mr-6">
               <svg
                 aria-hidden="true"
                 fill="none"
@@ -173,15 +164,38 @@ function dashboard({ children }) {
               </svg>
             </div>
             <div>
+              <span className="inline-block text-2xl font-bold">
+                {books.length}
+              </span>
+
+              <span className="block text-gray-500">Books</span>
+            </div>
+          </div>
+          <div className="flex items-center p-8 bg-white shadow rounded-lg">
+            <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+              <svg
+                aria-hidden="true"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"
+                  fill="#6e076b"
+                ></path>
+              </svg>
+            </div>
+            <div>
               <span className="block text-2xl font-bold">{bookStock}</span>
               <span className="block text-gray-500">Stock</span>
             </div>
           </div>
         </section>
         <section className="flex flex-wrap gap-6">
-          <div className="row-span-3 bg-white shadow rounded-lg">
+          <div className="w-80 bg-white shadow rounded-lg">
             <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-              <span>Students by average mark</span>
+              <span>Members</span>
               <button
                 type="button"
                 className="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600"
@@ -189,7 +203,7 @@ function dashboard({ children }) {
                 aria-haspopup="true"
                 aria-expanded="true"
               >
-                Descending
+                Books
                 <svg
                   className="-mr-1 ml-1 h-5 w-5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -206,25 +220,24 @@ function dashboard({ children }) {
             </div>
             <div className="overflow-y-auto max-h-96">
               <ul className="p-6 space-y-6">
-                <li className="flex items-center">
-                  <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                    <img
-                      src="https://randomuser.me/api/portraits/women/82.jpg"
-                      alt="Annette Watson profile picture"
-                    />
-                  </div>
-                  <span className="text-gray-600">Annette Watson</span>
-                  <span className="ml-auto font-semibold">9.3</span>
-                </li>
-                {userList.map((u, idx) => {
+                {userList.map((u) => {
                   return (
-                    <li key={idx} className="flex items-center">
-                      <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                    <li
+                      key={u.id}
+                      className="pr-2 flex items-center hover:bg-gray-200"
+                    >
+                      <Link
+                        href={`/dashboard/${u.userInfo.username}`}
+                        className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden"
+                      >
                         <img
-                          src="https://randomuser.me/api/portraits/men/81.jpg"
-                          alt="Calvin Steward profile picture"
+                          src={`https://randomuser.me/api/portraits/men/${
+                            Math.floor(Math.random() * 50) + 1
+                          }.jpg`}
+                          alt="profile picture"
+                          onClick={() => handleProfile(u)}
                         />
-                      </div>
+                      </Link>
                       <span className="text-gray-600">
                         {u.userInfo.firstName} {u.userInfo.lastName}
                       </span>
@@ -237,23 +250,31 @@ function dashboard({ children }) {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col row-span-3 bg-white shadow rounded-lg">
+          <div className="flex flex-col row-span-3 w-96 bg-white shadow rounded-lg">
             <div className="px-6 py-5 font-semibold border-b border-gray-100">
               Students by type of studying
             </div>
             <div className="p-4 flex-grow">
               <div className="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
-                Chart
+                <Chart />
               </div>
             </div>
           </div>
           <div className="w-full flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
-            <div className="px-6 py-3 font-semibold">Available Books</div>
-            <BookList books={books} dashboard={true} />
+            <div className="flex justify-between items-center">
+              <div className="px-6 py-3 font-semibold">Available Books</div>
+              <input
+                type="search"
+                className=" text-black px-4 py-2 m-3
+             border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                placeholder="Search Book"
+                onChange={(e) => handleSearch(e)}
+              />
+            </div>
+            <BookList books={bookList} dashboard={true} />
           </div>
         </section>
       </main>
-      {console.log(userList)}
     </div>
   );
 }

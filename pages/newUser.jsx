@@ -15,8 +15,9 @@ const initialState = {
     email: "",
     password: "",
     type: "",
+    img: "/images/avatar.png",
   },
-  status: "",
+  status: "INACTIVE",
   books: [],
   payment: 0,
 };
@@ -56,7 +57,7 @@ function newUser() {
 
   return (
     <div className="flex items-center justify-center min-h-screen pt-20 bg-gray-100">
-      <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
+      <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
         <h3 className="text-2xl font-bold text-center">User Registration</h3>
         <form action="">
           <div className="mt-4">
@@ -176,7 +177,7 @@ newUser.getLayout = function PageLayout(page) {
     <>
       <Navbar />
       {page}
-      <Footer />
+      <Footer width={true} />
     </>
   );
 };

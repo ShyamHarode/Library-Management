@@ -1,0 +1,128 @@
+ [{
+         "id": 45646,
+         "userInfo": {
+             "username": "ShyamHarode",
+             "firstName": "shyam",
+             "lastName": "harode",
+             "email": "shyam@gmail.com",
+             "password": "1234",
+             "type": "ADMIN",
+             "img": "images/avatar.png"
+         },
+         "status": "ACTIVE",
+         "books": [{
+                 "id": "123",
+                 "name": "The Bhagavad Gita",
+                 "isbn": "456123",
+                 "qty": "5",
+                 "date": "05122022",
+                 "img": "The-Bhagavad-Gita.jpg"
+             },
+             {
+                 "id": "124",
+                 "name": "Theory of Everything",
+                 "isbn": "879651",
+                 "qty": "15",
+                 "date": "05122022",
+                 "img": "Theory-of-Everything.jpg"
+             },
+             {
+                 "id": "125",
+                 "name": "Power of Habit",
+                 "isbn": "4569823",
+                 "qty": "45",
+                 "date": "05122022",
+                 "img": "Power-of-Habit.jpg"
+             }
+         ],
+         "payment": 30
+     },
+     {
+         "id": 4546646,
+
+         "userInfo": {
+             "username": "ShyamHarode5395",
+             "firstName": "Ajay",
+             "lastName": "Sharma",
+             "email": "shsyam@gmail.com",
+             "password": "1234",
+             "type": "USER",
+             "img": "images/avatar.png"
+         },
+         "status": "ACTIVE",
+         "books": [{
+                 "id": "125",
+                 "name": "Power of Habit",
+                 "isbn": "4569823",
+                 "qty": "45",
+                 "date": "05122022",
+                 "img": "Power-of-Habit.jpg"
+             },
+             {
+                 "id": "126",
+                 "name": "The Conscious Parent",
+                 "isbn": "4577123",
+                 "qty": "5",
+                 "date": "05122022",
+                 "img": "The-Conscious-Parent.jpg"
+             }
+         ],
+         "payment": 20
+     },
+     {
+         "id": 4561346,
+
+         "userInfo": {
+             "username": "vijayHarode",
+             "firstName": "vijay",
+             "lastName": "harode",
+             "email": "vijay@gmail.com",
+             "password": "1234",
+             "type": "USER",
+             "img": "images/avatar.png"
+         },
+         "status": "ACTIVE",
+         "books": [{
+             "id": "127",
+             "name": "The False Prince",
+             "isbn": "456123",
+             "qty": "5",
+             "date": "05122022",
+             "img": "The-False-Prince.jpg"
+         }],
+         "payment": 10
+     },
+     {
+         "id": 4465646,
+
+         "userInfo": {
+             "username": "praveen",
+             "firstName": "praveen",
+             "lastName": "rao",
+             "email": "praveen",
+             "password": "1234",
+             "type": "USER",
+             "img": "images/avatar.png"
+
+         },
+         "status": "INACTIVE",
+         "books": [],
+         "payment": 0
+     },
+     {
+         "id": 45641336,
+
+         "userInfo": {
+             "username": "sanju5",
+             "firstName": "Sanjay",
+             "lastName": "Garg",
+             "email": "sanjay@gmail.com",
+             "password": "1234",
+             "type": "USER",
+             "img": "images/avatar.png"
+         },
+         "status": "INACTIVE",
+         "books": [],
+         "payment": 0
+     }
+ ]

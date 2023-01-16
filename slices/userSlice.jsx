@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   userInfo: {},
   status: "",
@@ -13,11 +12,9 @@ const userSlice = createSlice({
   reducers: {
     setCurrentUser: (state, action) => {
       state = action.payload;
-      console.log("currentUser--------", action.payload);
     },
     updateInfo: (state, action) => {
       state.userInfo = action.payload;
-      console.log("userInfo--------", action.payload);
     },
 
     updateBooks: (state, action) => {
@@ -25,7 +22,6 @@ const userSlice = createSlice({
       if (state.books.length > 0) {
         state.status = "Active";
       }
-      console.log("userbooks--------", action.payload);
     },
 
     updateAmount: (state, action) => {

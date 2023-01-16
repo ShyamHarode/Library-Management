@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setLoggedUser } from "../slices/loggedUserSlice";
-import Router from "next/router";
+import { setLoggedUser, setAuthState } from "../slices/authSlice";
+import { setSelectedUser } from "../slices/selectedUserSlice";
+import { useRouter } from "next/router";
+import Navbar from "../components/Layouts/Navbar";
+import Footer from "../components/Layouts/Footer";
 
 function login() {
+  const userList = useSelector((state) => state.userList);
+  const dispatch = useDispatch();
   const [currUser, setCurrUser] = useState({
     email: "",
     password: "",
     type: "",
   });
-  const userList = useSelector((state) => state.userList);
-  const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const userAuth = (e) => {
     e.preventDefault();
@@ -22,11 +27,13 @@ function login() {
         user.userInfo.type == currUser.type
       ) {
         dispatch(setLoggedUser(user));
+        dispatch(setAuthState(true));
+        dispatch(setSelectedUser(user));
         return true;
       } else return false;
     });
     if (flag) {
-      Router.push("/dashboard");
+      router.push("/dashboard");
     } else {
       alert("Invalid Login");
     }
@@ -37,7 +44,6 @@ function login() {
       className="flex items-center h-screen justify-center bg-cover"
       style={{ backgroundImage: "url(images/library-bg.jpg" }}
     >
-      {console.log("ulist...", userList)}
       <div className="flex flex-col items-center p-3 bg-white rounded-lg">
         <div>
           <h3 className="text-4xl text-center font-bold ">Login</h3>
@@ -127,7 +133,7 @@ function login() {
           <div
             style={{ color: "blue" }}
             className="flex justify-center items-center mt-4 cursor-pointer "
-            onClick={() => Router.push("/newUser")}
+            onClick={() => router.push("/newUser")}
           >
             Create New Account
           </div>
@@ -138,3 +144,13 @@ function login() {
 }
 
 export default login;
+
+login.getLayout = function PageLayout(page) {
+  return (
+    <>
+      <Navbar />
+      {page}
+      <Footer width={true} />
+    </>
+  );
+};

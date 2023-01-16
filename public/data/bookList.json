@@ -1,0 +1,41 @@
+[{
+        "id": "123",
+        "name": "The Bhagavad Gita",
+        "isbn": "456123",
+        "qty": "5",
+        "date": "05122022",
+        "img": "The-Bhagavad-Gita.jpg"
+    },
+    {
+        "id": "124",
+        "name": "Theory of Everything",
+        "isbn": "879651",
+        "qty": "15",
+        "date": "05122022",
+        "img": "Theory-of-Everything.jpg"
+    },
+    {
+        "id": "125",
+        "name": "Power of Habit",
+        "isbn": "4569823",
+        "qty": "45",
+        "date": "05122022",
+        "img": "Power-of-Habit.jpg"
+    },
+    {
+        "id": "126",
+        "name": "The Conscious Parent",
+        "isbn": "4577123",
+        "qty": "5",
+        "date": "05122022",
+        "img": "The-Conscious-Parent.jpg"
+    },
+    {
+        "id": "127",
+        "name": "The False Prince",
+        "isbn": "456123",
+        "qty": "5",
+        "date": "05122022",
+        "img": "The-False-Prince.jpg"
+    }
+]
