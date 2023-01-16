@@ -30,12 +30,17 @@ function newBook() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addBook(book));
-    setBook(initialState);
+    if (book.name === "" || book.isbn === "" || book.qty === "") {
+      alert("please fill details");
+    } else {
+      e.preventDefault();
+      dispatch(addBook(book));
+      setBook(initialState);
+    }
   };
 
   return (
-    <div className="flex items-center justify-center gap-4 p-12 pt-24 sm:pl-72 bg-gray-200">
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 p-12 pt-24 sm:pl-72 bg-gray-200">
       <div className="mx-auto w-full max-w-[550px] bg-white rounded-lg shadow-md p-4">
         <form>
           <div className="-mx-3 flex flex-wrap">
@@ -124,7 +129,6 @@ function newBook() {
                 <input
                   type="file"
                   name="img"
-                  // value={book.img}
                   onChange={(e) => handleImage(e)}
                   accept="image/*"
                   className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -155,9 +159,10 @@ function newBook() {
             return (
               <li
                 key={idx}
-                className="px-4 py-2 flex justify-between hover:bg-gray-200"
+                className="px-4 py-2 flex justify-between text-start items-center hover:bg-gray-200"
               >
-                <span>{b.name} </span> <span>{b.qty}</span>
+                <span className="w-max">{b.name} </span>{" "}
+                <span className="ml-2">{b.qty}</span>
               </li>
             );
           })}

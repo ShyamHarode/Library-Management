@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function member() {
   const currentUser = useSelector((state) => state.selectedUser);
+  const { authState, authUser } = useSelector((state) => state.auth);
 
   const [bookList, setBookList] = useState(currentUser.books);
   const router = useRouter();
@@ -17,10 +18,10 @@ function member() {
   };
 
   useEffect(() => {
-    if (Object.keys(currentUser).length === 0) {
+    if (!authState) {
       router.push("/login");
     }
-  }, [currentUser]);
+  }, []);
 
   return (
     <div className="w-full flex items-center flex-wrap  pt-24 sm:pl-72 bg-gray-100">
@@ -29,8 +30,8 @@ function member() {
           <div className="w-48 p-3 flex flex-col items-center justify-center">
             <img
               className="w-32 h-32 rounded-full bg-red-400"
-              src={currentUser.userInfo?.img}
-              alt=""
+              src={currentUser.userInfo.img}
+              alt="profile"
             />
             <h3 className="p-2 text-2xl font-bold text-center">
               {currentUser.userInfo?.firstName}
@@ -88,11 +89,23 @@ function member() {
                   className="m-2 bg-white shadow-md rounded-lg max-w-sm focus:ring-4 focus:ring-orange-900 dark:bg-gray-800 dark:border-gray-700 w-40"
                   key={idx + book.name}
                 >
-                  <img
-                    className="rounded-t-lg p-4 w-36 mx-auto"
-                    src={book.img ? book.img : "/images/No_Image_Available.jpg"}
-                    alt="book image"
-                  />
+                  {book.img.endsWith(".jpg") ? (
+                    <img
+                      className="rounded-t-lg p-4 w-36 mx-auto"
+                      src={`/images/${book.img}`}
+                      alt="book image"
+                    />
+                  ) : (
+                    <img
+                      className="rounded-t-lg p-4 w-36 mx-auto"
+                      src={
+                        book.img.includes("http")
+                          ? book.img
+                          : "/images/No_Image_Available.jpg"
+                      }
+                      alt="book image"
+                    />
+                  )}
 
                   <div className="px-5 pb-5">
                     <a href="#">

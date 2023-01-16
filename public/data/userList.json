@@ -1,4 +1,42 @@
  [{
+         "id": 456476,
+         "userInfo": {
+             "username": "Demo",
+             "firstName": "Demo",
+             "lastName": "User",
+             "email": "demo@gmail.com",
+             "password": "1234",
+             "type": "ADMIN",
+             "img": "https://randomuser.me/api/portraits/men/0.jpg"
+         },
+         "status": "ACTIVE",
+         "books": [{
+                 "id": "123",
+                 "name": "The Bhagavad Gita",
+                 "isbn": "456123",
+                 "qty": "5",
+                 "date": "05122022",
+                 "img": "The-Bhagavad-Gita.jpg"
+             },
+             {
+                 "id": "124",
+                 "name": "Theory of Everything",
+                 "isbn": "879651",
+                 "qty": "15",
+                 "date": "05122022",
+                 "img": "Theory-of-Everything.jpg"
+             },
+             {
+                 "id": "125",
+                 "name": "Power of Habit",
+                 "isbn": "4569823",
+                 "qty": "45",
+                 "date": "05122022",
+                 "img": "Power-of-Habit.jpg"
+             }
+         ],
+         "payment": 30
+     }, {
          "id": 45646,
          "userInfo": {
              "username": "ShyamHarode",
@@ -7,7 +45,7 @@
              "email": "shyam@gmail.com",
              "password": "1234",
              "type": "ADMIN",
-             "img": "images/avatar.png"
+             "img": "/images/avatar.png"
          },
          "status": "ACTIVE",
          "books": [{
@@ -47,7 +85,7 @@
              "email": "shsyam@gmail.com",
              "password": "1234",
              "type": "USER",
-             "img": "images/avatar.png"
+             "img": "/images/avatar.png"
          },
          "status": "ACTIVE",
          "books": [{
@@ -79,7 +117,7 @@
              "email": "vijay@gmail.com",
              "password": "1234",
              "type": "USER",
-             "img": "images/avatar.png"
+             "img": "/images/avatar.png"
          },
          "status": "ACTIVE",
          "books": [{
@@ -102,7 +140,7 @@
              "email": "praveen",
              "password": "1234",
              "type": "USER",
-             "img": "images/avatar.png"
+             "img": "/images/avatar.png"
 
          },
          "status": "INACTIVE",
@@ -119,7 +157,7 @@
              "email": "sanjay@gmail.com",
              "password": "1234",
              "type": "USER",
-             "img": "images/avatar.png"
+             "img": "/images/avatar.png"
          },
          "status": "INACTIVE",
          "books": [],

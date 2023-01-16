@@ -46,8 +46,8 @@ function Navbar() {
 
             <img
               src={
-                authUser.userInfo?.img
-                  ? "user.userInfo.img"
+                authUser.userInfo.img
+                  ? authUser.userInfo.img
                   : "/images/avatar.png"
               }
               alt="user profile photo"

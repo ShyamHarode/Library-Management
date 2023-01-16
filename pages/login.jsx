@@ -38,6 +38,15 @@ function login() {
       alert("Invalid Login");
     }
   };
+  const demoAuth = (e) => {
+    e.preventDefault();
+
+    const user = userList[0];
+    dispatch(setLoggedUser(user));
+    dispatch(setAuthState(true));
+    dispatch(setSelectedUser(user));
+    router.push("/dashboard");
+  };
 
   return (
     <div
@@ -82,7 +91,6 @@ function login() {
             </label>
           </div>
         </div>
-        {/* {error && <div style={{ color: "red" }}>Invalid details</div>} */}
         <div className=" px-6 py-4 mt-3 overflow-hidden  sm:max-w-lg sm:rounded-lg">
           <form>
             <div className="flex items-center justify-between">
@@ -94,7 +102,6 @@ function login() {
               </label>
 
               <input
-                // type="email"
                 name="email"
                 className="block w-50 mt-1 border-2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 onChange={(e) =>
@@ -120,14 +127,25 @@ function login() {
                 }
               />
             </div>
-            <div className="flex justify-center items-center mt-4">
-              <button
-                type="submit"
-                className="w-50 px-3 py-2 tracking-wide text-white bg-blue-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
-                onClick={(e) => userAuth(e)}
-              >
-                Login
-              </button>
+            <div className="flex gap-2 justify-center">
+              <div className="flex justify-center items-center mt-4">
+                <button
+                  type="submit"
+                  className="w-50 px-3 py-2 tracking-wide text-white bg-blue-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+                  onClick={(e) => userAuth(e)}
+                >
+                  Login
+                </button>
+              </div>
+              <div className="flex justify-center items-center mt-4">
+                <button
+                  type="submit"
+                  className="w-50 px-3 py-2 tracking-wide text-white bg-blue-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+                  onClick={(e) => demoAuth(e)}
+                >
+                  Demo Login
+                </button>
+              </div>
             </div>
           </form>
           <div

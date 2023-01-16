@@ -26,6 +26,7 @@ function Aside() {
             <nav className="flex flex-col mx-4 my-6 space-y-4">
               <Link
                 href="/dashboard"
+                onClick={(e) => setSidebar(false)}
                 className="inline-flex items-center justify-start gap-2 px-2 py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-purple-700 focus:bg-white rounded-lg"
               >
                 <svg
@@ -41,6 +42,7 @@ function Aside() {
               {loginType == "ADMIN" && (
                 <Link
                   href="/dashboard/members"
+                  onClick={(e) => setSidebar(false)}
                   className="inline-flex items-center justify-start gap-2 px-2 py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-purple-700 focus:bg-white rounded-lg"
                 >
                   <svg
@@ -60,6 +62,7 @@ function Aside() {
               {loginType == "ADMIN" && (
                 <Link
                   href="/dashboard/newBook"
+                  onClick={(e) => setSidebar(false)}
                   className="inline-flex items-center justify-start gap-2 px-2 py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-purple-700 focus:bg-white rounded-lg"
                 >
                   <svg
@@ -79,6 +82,7 @@ function Aside() {
               )}
               <a
                 href="#"
+                onClick={(e) => setSidebar(false)}
                 className="inline-flex items-center justify-start gap-2 px-2 py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-purple-700 focus:bg-white rounded-lg"
               >
                 <svg
@@ -100,6 +104,7 @@ function Aside() {
               </a>
               <Link
                 href="/dashboard"
+                onClick={(e) => setSidebar(false)}
                 className="inline-flex items-center justify-start gap-2 px-2 py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-purple-700 focus:bg-white rounded-lg"
               >
                 <svg
@@ -118,7 +123,10 @@ function Aside() {
                 </svg>
                 <span className="">Documents</span>
               </Link>
-              <button className="inline-flex items-center justify-start gap-2 px-2 py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-purple-700 focus:bg-white rounded-lg">
+              <button
+                onClick={(e) => setSidebar(false)}
+                className="inline-flex items-center justify-start gap-2 px-2 py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-purple-700 focus:bg-white rounded-lg"
+              >
                 <svg
                   aria-hidden="true"
                   fill="none"

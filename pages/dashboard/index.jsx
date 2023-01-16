@@ -57,7 +57,11 @@ function dashboard() {
         <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
           <div className="mr-6">
             <h1 className="text-4xl font-semibold mb-2">Dashboard</h1>
-            <h2 className="text-gray-600 ml-0.5">Mobile UX/UI Design course</h2>
+            <h2 className="text-gray-600 ml-0.5">
+              {authState && authUser.userInfo.type === "ADMIN"
+                ? "Admin"
+                : "Member"}
+            </h2>
           </div>
           <div className="flex flex-wrap items-start justify-end -mb-3">
             <button className="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
@@ -77,26 +81,28 @@ function dashboard() {
               </svg>
               Manage dashboard
             </button>
-            <Link
-              href="/dashboard/create-user"
-              className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3"
-            >
-              <svg
-                aria-hidden="true"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2"
+            {authState && authUser.userInfo.type === "ADMIN" && (
+              <Link
+                href="/dashboard/create-user"
+                className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-              Create new user
-            </Link>
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+                Create new user
+              </Link>
+            )}
           </div>
         </div>
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
@@ -220,7 +226,7 @@ function dashboard() {
             </div>
             <div className="overflow-y-auto max-h-96">
               <ul className="p-6 space-y-6">
-                {userList.map((u) => {
+                {userList.map((u, idx) => {
                   return (
                     <li
                       key={u.id}
@@ -231,9 +237,7 @@ function dashboard() {
                         className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden"
                       >
                         <img
-                          src={`https://randomuser.me/api/portraits/men/${
-                            Math.floor(Math.random() * 50) + 1
-                          }.jpg`}
+                          src={`https://randomuser.me/api/portraits/men/${idx}.jpg`}
                           alt="profile picture"
                           onClick={() => handleProfile(u)}
                         />
@@ -265,7 +269,7 @@ function dashboard() {
               <div className="px-6 py-3 font-semibold">Available Books</div>
               <input
                 type="search"
-                className=" text-black px-4 py-2 m-3
+                className=" text-black pl-4 py-2 m-3 w-32 sm:w-48
              border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 placeholder="Search Book"
                 onChange={(e) => handleSearch(e)}

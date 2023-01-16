@@ -119,17 +119,17 @@ function issueBook() {
             </label>
             <input
               type="search"
-              className=" text-black px-4 py-2 m-2
+              className=" text-black px-4 py-2 m-2 w-32 sm:w-48
              border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
               onChange={(e) => handleSearch(e)}
             />
           </div>
           <div>
-            <div className="m-2 p-2">{cart.length} Selected</div>
+            <div className="m-2">{cart.length} Selected</div>
 
             <button
               onClick={() => handleIssueBooks()}
-              className="bg-purple-400 rounded-lg p-2 h-10 text-center"
+              className="bg-purple-400 rounded-lg p-1 sm:h-10 text-center"
             >
               Issue Selected Books
             </button>
