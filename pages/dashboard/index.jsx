@@ -4,7 +4,7 @@ import BookList from "../../components/BookList";
 import { setSelectedUser } from "../../slices/selectedUserSlice";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Chart from "../../components/Chart";
+import CardLineChart from "../../components/CardLineChart";
 
 function dashboard() {
   const userList = useSelector((state) => state.userList);
@@ -198,69 +198,71 @@ function dashboard() {
             </div>
           </div>
         </section>
-        <section className="flex flex-wrap gap-6">
-          <div className="w-80 bg-white shadow rounded-lg">
-            <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-              <span>Members</span>
-              <button
-                type="button"
-                className="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600"
-                id="options-menu"
-                aria-haspopup="true"
-                aria-expanded="true"
-              >
-                Books
-                <svg
-                  className="-mr-1 ml-1 h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+        <section className="flex flex-wrap gap-6 justify-center">
+          <div className="flex flex-wrap w-full gap-4">
+            <div className="w-80 bg-white shadow rounded-lg">
+              <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+                <span>Members</span>
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600"
+                  id="options-menu"
+                  aria-haspopup="true"
+                  aria-expanded="true"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="overflow-y-auto max-h-96">
-              <ul className="p-6 space-y-6">
-                {userList.map((u, idx) => {
-                  return (
-                    <li
-                      key={u.id}
-                      className="pr-2 flex items-center hover:bg-gray-200"
-                    >
-                      <Link
-                        href={`/dashboard/${u.userInfo.username}`}
-                        className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden"
+                  Books
+                  <svg
+                    className="-mr-1 ml-1 h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="overflow-y-auto max-h-96">
+                <ul className="p-6 space-y-6">
+                  {userList.map((u, idx) => {
+                    return (
+                      <li
+                        key={u.id}
+                        className="pr-2 flex items-center hover:bg-gray-200"
                       >
-                        <img
-                          src={`https://randomuser.me/api/portraits/men/${idx}.jpg`}
-                          alt="profile picture"
-                          onClick={() => handleProfile(u)}
-                        />
-                      </Link>
-                      <span className="text-gray-600">
-                        {u.userInfo.firstName} {u.userInfo.lastName}
-                      </span>
-                      <span className="ml-auto font-semibold">
-                        {u.books.length}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
+                        <Link
+                          href={`/dashboard/${u.userInfo.username}`}
+                          className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden"
+                        >
+                          <img
+                            src={`https://randomuser.me/api/portraits/men/${idx}.jpg`}
+                            alt="profile picture"
+                            onClick={() => handleProfile(u)}
+                          />
+                        </Link>
+                        <span className="text-gray-600">
+                          {u.userInfo.firstName} {u.userInfo.lastName}
+                        </span>
+                        <span className="ml-auto font-semibold">
+                          {u.books.length}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col row-span-3 w-96 bg-white shadow rounded-lg">
-            <div className="px-6 py-5 font-semibold border-b border-gray-100">
-              Students by type of studying
-            </div>
-            <div className="p-4 flex-grow">
-              <div className="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
-                <Chart />
+            <div className="flex flex-col sm:w-2/4  bg-white shadow rounded-lg">
+              <div className="px-6 py-5 font-semibold border-b border-gray-100">
+                Students by type of studying
+              </div>
+              <div className="p-4 flex-grow ">
+                <div className="flex w-80 sm:w-full  items-center justify-center h-full p-2 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                  <CardLineChart />
+                </div>
               </div>
             </div>
           </div>
