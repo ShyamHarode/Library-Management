@@ -257,7 +257,7 @@ function dashboard() {
             </div>
             <div className="flex flex-col sm:w-2/4  bg-white shadow rounded-lg">
               <div className="px-6 py-5 font-semibold border-b border-gray-100">
-                Students by type of studying
+                New users and Active user
               </div>
               <div className="p-4 flex-grow ">
                 <div className="flex w-80 sm:w-full  items-center justify-center h-full p-2 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">

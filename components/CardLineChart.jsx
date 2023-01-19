@@ -42,7 +42,7 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: [55, 67, 52, 45, 56, 75, 86],
     },
     {
       label: "New users",
@@ -59,7 +59,7 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [30, 50, 41, 34, 70, 75, 55],
+      data: [30, 50, 41, 34, 62, 70, 67],
     },
   ],
 };
