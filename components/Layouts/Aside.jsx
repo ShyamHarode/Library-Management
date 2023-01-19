@@ -147,7 +147,6 @@ function Aside() {
           </nav>
         </div>
       </aside>
-
       <button
         onClick={(e) => setSidebar(!sidebar)}
         className="sm:hidden fixed p-2 top-4 left-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 focus:bg-gray-100 focus:text-gray-800 rounded z-10"
